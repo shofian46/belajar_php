@@ -1,3 +1,9 @@
+<?php include 'config/koneksi.php';
+
+// munculkan data user
+$query = mysqli_query($conn, "SELECT * FROM users ORDER BY user_id DESC");
+$row = mysqli_fetch_all($query, MYSQLI_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,46 +16,7 @@
 
 <body>
     <div class="wrapper">
-
-        <header class="shadow-sm">
-            <nav class="navbar navbar-expand-lg bg-body-white">
-
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Admin</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Page
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="user.php">User</a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
-        </header>
-
+        <?php include 'inc/header.php' ?>
         <div class="content mt-5">
             <div class="container">
                 <div class="row">
@@ -63,7 +30,7 @@
                                     <div align="right" class="mb-3">
                                         <a href="tambah-user.php" class="btn btn-primary">Add</a>
                                     </div>
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -73,16 +40,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>William</td>
-                                                <td>williamsetiady@gmail.com</td>
-                                                <td>
-                                                    <a href="" class="btn btn-success btn-sm">Edit</a>
-                                                    <a onclick="return confirm('Are you sure?')" href=""
-                                                        class="btn btn-danger btn-sm">Delete</a>
-                                                </td>
-                                            </tr>
+                                            <?php $i = 1;
+                                            foreach ($row as $key => $data): ?>
+                                                <tr>
+                                                    <td><?= $i++; ?></td>
+                                                    <td><?= $data['name']; ?></td>
+                                                    <td><?= $data['email']; ?></td>
+                                                    <td>
+                                                        <a href="edit.php?edit=<?= $data['user_id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                                        <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $data['user_id']; ?>"
+                                                            class="btn btn-danger btn-sm">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

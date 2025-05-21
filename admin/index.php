@@ -8,7 +8,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
   // Check if the email and password are empty
 
-  $query = mysqli_query($config, "SELECT * FROM users WHERE email='$email' AND password='$password'");
+  $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'");
   // Check if the user exists
   if (mysqli_num_rows($query) > 0) {
     $row = mysqli_fetch_assoc($query);
@@ -74,6 +74,12 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     <?php if (isset($_GET['login'])) : ?>
                       <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         Mohon periksa kembali email dan password anda!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    <?php endif; ?>
+                    <?php if (isset($_GET['logout'])) : ?>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Anda Telah Keluar Dari Aplikasi!
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
                     <?php endif; ?>
