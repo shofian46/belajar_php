@@ -39,6 +39,9 @@ if (!$_name) {
             <li class="nav-item">
               <a class="nav-link" href="user.php?role=<?= base64_encode($_SESSION['role']) ?>">User</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.php?role=<?= base64_encode($_SESSION['role']) ?>">Profile</a>
+            </li>
           <?php } ?>
 
         </ul>

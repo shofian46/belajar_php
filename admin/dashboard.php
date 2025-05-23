@@ -18,10 +18,11 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    Dashboard
                                 </div>
                                 <div class="card-body">
-                                    <h5 align="right">Selamat Datang.. <?= $_name ?></h5>
+                                    <?php if (isset($_GET['page']) && file_exists("content/" . $_GET['page'] . ".php")) {
+                                        include "content/" . $_GET['page'] . ".php";
+                                    } ?>
                                 </div>
                             </div>
                         </div>

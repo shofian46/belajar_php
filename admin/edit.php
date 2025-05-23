@@ -8,15 +8,9 @@ $row = mysqli_fetch_assoc($data);
 
 if (isset($_POST["edit"])) {
   if (ubah($_POST) > 0) {
-    echo "<script>
-				alert('data berhasil diubah!');
-				document.location.href = 'user.php';
-			  </script>";
+    header('Location: user.php?role=' . base64_encode($_SESSION['role']));
   } else {
-    echo "<script>
-				alert('data gagal diubah!');
-				document.location.href = 'user.php';
-			  </script>";
+    header('Location: user.php?role=' . base64_encode($_SESSION['role']));
   }
 }
 
