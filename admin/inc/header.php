@@ -7,7 +7,6 @@ if (!$_name) {
 ?>
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg bg-body-white">
-
     <div class="container">
       <a class="navbar-brand" href="#">Admin</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -34,9 +33,14 @@ if (!$_name) {
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="user.php">User</a>
-          </li>
+          <?php
+          $decrypt = base64_decode($_GET['role']);
+          if (isset($_GET['role']) && $decrypt == 1) { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="user.php?role=<?= base64_encode($_SESSION['role']) ?>">User</a>
+            </li>
+          <?php } ?>
+
         </ul>
 
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">

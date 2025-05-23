@@ -28,7 +28,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div align="right" class="mb-3">
-                                        <a href="tambah-user.php" class="btn btn-primary">Add</a>
+                                        <a href="tambah-user.php?role=<?= base64_encode($_SESSION['role']); ?>" class="btn btn-primary">Add</a>
                                     </div>
                                     <table class="table table-bordered">
                                         <thead>
@@ -47,7 +47,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                                     <td><?= $data['name']; ?></td>
                                                     <td><?= $data['email']; ?></td>
                                                     <td>
-                                                        <a href="edit.php?edit=<?= $data['user_id']; ?>" class="btn btn-success btn-sm">Edit</a>
+                                                        <a href="edit.php?edit=<?= $data['user_id']; ?>&role=<?= base64_encode($_SESSION['role']) ?>" class="btn btn-success btn-sm">Edit</a>
                                                         <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $data['user_id']; ?>"
                                                             class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
