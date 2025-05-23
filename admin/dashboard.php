@@ -1,3 +1,6 @@
+<?php
+include 'config/koneksi.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +18,7 @@
             <div class="content mt-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-8">
                             <div class="card">
                                 <div class="card-header">
                                 </div>

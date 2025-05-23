@@ -8,7 +8,7 @@ if (!$_name) {
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg bg-body-white">
     <div class="container">
-      <a class="navbar-brand" href="#">Admin</a>
+      <a class="navbar-brand" href="dashboard.php?role=<?= $_SESSION['role']; ?>">Admin</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@ if (!$_name) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="dashboard.php">Home</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -40,7 +40,7 @@ if (!$_name) {
               <a class="nav-link" href="user.php?role=<?= base64_encode($_SESSION['role']) ?>">User</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="profile.php?role=<?= base64_encode($_SESSION['role']) ?>">Profile</a>
+              <a class="nav-link" href="dashboard.php?role=<?= base64_encode($_SESSION['role']) ?>&page=manage-profile">Profile</a>
             </li>
           <?php } ?>
 

@@ -3,15 +3,9 @@ include 'config/koneksi.php';
 
 if (isset($_POST["tambah"])) {
     if (register($_POST) > 0) {
-        echo "<script>
-				alert('data berhasil ditambahkan!');
-				document.location.href = 'user.php';
-			  </script>";
+        header('Location: user.php?role=' . base64_encode($_SESSION['role']));
     } else {
-        echo "<script>
-				alert('data gagal ditambahkan!');
-				document.location.href = 'user.php';
-			  </script>";
+        header('Location: user.php?role=' . base64_encode($_SESSION['role']));
     }
 }
 $header = isset($_GET['edit']) ? 'Edit' : 'Tambah';

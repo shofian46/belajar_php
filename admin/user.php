@@ -48,7 +48,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                                     <td><?= $data['email']; ?></td>
                                                     <td>
                                                         <a href="edit.php?edit=<?= $data['user_id']; ?>&role=<?= base64_encode($_SESSION['role']) ?>" class="btn btn-success btn-sm">Edit</a>
-                                                        <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $data['user_id']; ?>"
+                                                        <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $data['user_id']; ?>&role=<?= base64_encode($_SESSION['role']) ?>"
                                                             class="btn btn-danger btn-sm">Delete</a>
                                                     </td>
                                                 </tr>

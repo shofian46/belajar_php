@@ -43,7 +43,7 @@ function register($data)
   $password = sha1($password);
 
   // insert ke DB
-  $sql = "INSERT INTO users VALUES ('', '$name', '$email', '$password', CURRENT_TIMESTAMP, null)";
+  $sql = "INSERT INTO users VALUES ('', null, '$name', '$email', '$password', CURRENT_TIMESTAMP, null)";
   mysqli_query($conn, $sql);
 
   return mysqli_affected_rows($conn);
