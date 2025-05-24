@@ -1,14 +1,11 @@
-<?php session_start();
-$_name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
-if (!$_name) {
-  header('Location: index.php?access=failed');
-  exit();
-}
+<?php
+
+
 ?>
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg bg-body-white">
     <div class="container">
-      <a class="navbar-brand" href="dashboard.php?role=<?= $_SESSION['role']; ?>">Admin</a>
+      <a class="navbar-brand" href="dashboard.php">CMS Admin</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +22,7 @@ if (!$_name) {
               Page
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="?page=about">About Me</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -33,17 +30,12 @@ if (!$_name) {
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-          <?php
-          $decrypt = base64_decode($_GET['role']);
-          if (isset($_GET['role']) && $decrypt == 1) { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="user.php?role=<?= base64_encode($_SESSION['role']) ?>">User</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="dashboard.php?role=<?= base64_encode($_SESSION['role']) ?>&page=manage-profile">Profile</a>
-            </li>
-          <?php } ?>
-
+          <li class="nav-item">
+            <a class="nav-link" href="?page=user">User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="?page=manage-profile">Profile</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">

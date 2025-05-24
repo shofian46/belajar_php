@@ -1,5 +1,13 @@
 <?php
+session_start();
+$_name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
+if (!$_name) {
+    header('Location: index.php?access=failed');
+    exit();
+}
+
 include 'config/koneksi.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +25,25 @@ include 'config/koneksi.php';
             <?php include 'inc/header.php' ?>
             <div class="content mt-5">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-header">
+                                    <?= isset($_GET['page']) ? str_replace("-", " ", ucfirst($_GET['page'])) : 'Home' ?>
                                 </div>
                                 <div class="card-body">
-                                    <?php if (isset($_GET['page']) && file_exists("content/" . $_GET['page'] . ".php")) {
-                                        include "content/" . $_GET['page'] . ".php";
-                                    } ?>
+                                    <?php
+                                    if (isset($_GET['page'])) {
+                                        // jika ada page yang dipilih
+                                        if (file_exists("content/" . $_GET['page'] . '.php')) {
+                                            include "content/" . $_GET['page'] . ".php";
+                                        } else {
+                                            include 'content/404.php';
+                                        }
+                                    } else {
+                                        include 'content/home.php';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>

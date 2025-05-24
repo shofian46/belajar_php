@@ -1,39 +1,48 @@
 <?php
 if (isset($_POST['simpan'])) {
-  $profile_name = htmlspecialchars($_POST['profile_name']);
-  $profesion = htmlspecialchars($_POST['profesion']);
-  $description = htmlspecialchars($_POST['description']);
+  $nm_profile = $_POST['profile_name'];
+  $profession = $_POST['profesion'];
+  $description = $_POST['description'];
   $photo = $_FILES['photo'];
-  if ($photo['error'] === 0) {
-    $fileName = uniqid() . '-' . basename($photo['name']);
-    $filePath = 'assets/img/' . $fileName;
-    move_uploaded_file($photo['tmp_name'], $filePath);
-    $insertQ = mysqli_query($conn, "INSERT INTO profiles (profile_name, profesion, description, photo) VALUES ('$profile_name', '$profesion', '$description', '$fileName')");
+
+  if ($photo['error'] == 0) {
+    $filename = uniqid() . '_' . basename($photo['name']);
+    $filepath = 'assets/img/' . $filename;
+    move_uploaded_file($photo['tmp_name'], $filepath);
+
+    $inputQ = mysqli_query($conn, "INSERT INTO profiles (profile_name, profesion, description, photo) VALUES ('$nm_profile','$profession','$description','$filename')");
   }
-  if ($insertQ) {
-    header('location:dashboard.php?role=' . base64_encode($_SESSION['role']) . '&page=manage-profile');
+
+  if ($inputQ) {
+    // header('location:dashboard.php?level=' . base64_encode($_SESSION['LEVEL']) . '&page=manage-profile');
   }
 }
 
-$selectProfile = mysqli_query($conn, "SELECT * FROM profiles");
-$row = mysqli_fetch_assoc($selectProfile);
 
 if (isset($_GET['del'])) {
-  $id = $_GET['del'];
-  $selectPhoto = mysqli_query($conn, "SELECT photo FROM profiles WHERE id_profile = $id");
-  $rowPhoto = mysqli_fetch_assoc($selectPhoto);
-  if (isset($rowPhoto['photo'])) {
-    unlink("assets/img/" .  $row['photo']);
+  $idhapus = $_GET['del'];
+
+  $pilihphoto = mysqli_query($conn, "SELECT photo FROM profiles WHERE id_profile= $idhapus");
+  $rowphoto = mysqli_fetch_assoc($pilihphoto);
+  if (isset($rowphoto['photo'])) {
+    unlink('assets/img/' . $rowphoto['photo']);
   }
-  $Qdelete = mysqli_query($conn, "DELETE FROM profiles WHERE id_profile='$id'");
 
+  // if ($rowphoto && !empty($rowphoto['photo'])) {
+  //   $filepath = 'uploads/' . $rowphoto['photo'];
+  //   if (file_exists($filepath) && is_file($filepath)) {
+  //     unlink($filepath);
+  //   }
+  // }
 
-  if ($Qdelete) {
-    header('location:dashboard.php?role=' . base64_encode($_SESSION['role']) . '&page=manage-profile');
+  $delete = mysqli_query($conn, "DELETE FROM profiles WHERE id_profile=$idhapus");
+  if ($delete) {
+    // header('location:dashboard.php?level=' . base64_encode($_SESSION['LEVEL']));
   }
 }
+$pilihprofile = mysqli_query($conn, "SELECT * FROM profiles");
+$row = mysqli_fetch_assoc($pilihprofile);
 ?>
-
 <form action="" method="post" enctype="multipart/form-data">
   <div class="m-2">
     <label for="form-label">Profile Name</label>
@@ -59,7 +68,7 @@ if (isset($_GET['del'])) {
       </div>
     <?php } else { ?>
       <div class="d-grid gap-2 d-md-block my-2">
-        <a onclick="return confirm('Yakin ingin menghapus data ini?')" href="?role=<?= base64_encode($_SESSION['role']); ?>&page=manage-profile&del=<?= $row['id_profile']; ?>" class="btn btn-danger rounded-pill" name="del">Delete</a>
+        <a onclick="return confirm('Yakin ingin menghapus data ini?')" href="?page=manage-profile&del=<?= $row['id_profile']; ?>" class="btn btn-danger rounded-pill" name="del">Delete</a>
       </div>
     <?php } ?>
   </div>

@@ -16,7 +16,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $_SESSION['name'] = $row['name'];
     $_SESSION['uuid'] = $row['id'];
     $_SESSION['role'] = $row['id_role'];
-    header('Location: dashboard.php?role=' . base64_encode($_SESSION['role']));
+    header('Location: dashboard.php');
   } else {
     // Redirect to the login page with an error message
     header('Location: index.php?login=failed');

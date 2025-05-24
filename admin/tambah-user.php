@@ -10,6 +10,24 @@ if (isset($_POST["tambah"])) {
 }
 $header = isset($_GET['edit']) ? 'Edit' : 'Tambah';
 $id_user = isset($_GET['edit']) ? $_GET['edit'] : null;
+
+if (isset($_POST['edit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = sha1($_POST['password']);
+
+    if ($password == '') {
+        $query = mysqli_query($conn, "UPDATE users SET name='$name', email='$email' WHERE id_user='$id_user'");
+        # code...
+    }
+    $queryUpdate = mysqli_query($conn, "UPDATE users SET name='$name', email='$email', password='$password' WHERE id_user='$id_user'");
+
+    if ($queryUpdate) {
+        header('Location: user.php?ubah=berhasil');
+    } else {
+        header('Location: user.php?ubah=gagal');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
