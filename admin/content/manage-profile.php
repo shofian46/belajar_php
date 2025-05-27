@@ -52,16 +52,6 @@ if (isset($_POST['simpan'])) {
       header("location:?page=manage-profile&tambah=berhasil");
     }
   }
-  // if ($photo['error'] == 0) {
-  //     $fileName = uniqid() . "_" . basename($photo['name']);
-  //     $filePath = "uploads/" . $fileName;
-  //     move_uploaded_file($photo['tmp_name'], $filePath);
-  //     $insertQ = mysqli_query($config, "INSERT INTO profiles (profile_name, profesion, description, photo) VALUES ('$profile_name', '$profesion', '$description', '$fileName')");
-  // }
-  // //END PROSES SIMPAN FOTO
-  // if ($insertQ) {
-  //     // header("location:?level=" . base64_encode($_SESSION['LEVEL']) . "&page=manage-profile");
-  // }
 }
 
 $selectProfile = mysqli_query($conn, "SELECT * FROM profiles");

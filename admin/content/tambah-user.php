@@ -9,14 +9,14 @@ if (isset($_POST['simpan'])) {
   $role = $_POST['role'];
   $password = sha1($_POST['password']);
 
-  $query = mysqli_query($conn, "INSERT INTO users (name, email, id_role, password) VALUES (null,'$name', '$email', '$role', '$password')");
+  $query = mysqli_query($conn, "INSERT INTO users (name, email, id_role, password) VALUES ('$name', '$email', '$role', '$password')");
   if ($query) {
     header('?page=user&tambah=berhasil');
   }
 }
 
 $header = isset($_GET['edit']) ? "Edit" : "Tambah";
-$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+$id_user = isset($_GET['edit']) ? $_POST['simpan'] : '';
 $queryedit = mysqli_query($conn, "SELECT * FROM users WHERE user_id='$id_user'");
 $rowedit = mysqli_fetch_assoc($queryedit);
 
@@ -65,7 +65,7 @@ $rowJoinRole = mysqli_fetch_assoc($joinRole);
       <select name="role" id="role" class="form-select" required>
         <option value="">Pilih Role</option>
         <?php foreach ($rowRole as $row): ?>
-          <option value="<?= $row['id']; ?>" <?= isset($_GET['edit']) ? ($row['id'] == $rowJoinRole['id_role']) ? 'selected' : '' : ''; ?>><?= $rowJoinRole['role']; ?></option>
+          <option value="<?= $row['id']; ?>" <?= isset($_GET['edit']) ? ($row['id'] == $rowJoinRole['id_role']) ? 'selected' : '' : ''; ?>><?= $row['role']; ?></option>
         <?php endforeach; ?>
       </select>
     </div>
@@ -81,6 +81,6 @@ $rowJoinRole = mysqli_fetch_assoc($joinRole);
   </div>
   <div class="d-grid gap-2 d-md-block my-2">
     <a class="btn btn-secondary rounded-pill" href="?page=user">Cancel</a>
-    <button class="btn btn-primary rounded-pill" type="submit" name="<?= isset($id_user) ? 'edit' : 'tambah'; ?>"><?= $header; ?></button>
+    <button class="btn btn-primary rounded-pill" type="submit" name="<?= (!isset($id_user) ? 'edit' : 'simpan'); ?>"><?= $header; ?></button>
   </div>
 </form>

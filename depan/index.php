@@ -9,11 +9,14 @@ if (isset($_POST['simpan'])) {
 
 	$queryUpdate = mysqli_query($conn, "INSERT INTO contact (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')");
 	if ($queryUpdate) {
-		header('index.php?tambah=berhasil');
+		header('index.php');
 	}
-	$query = mysqli_query($conn, "SELECT * FROM about ORDER BY id DESC");
-	$row = mysqli_fetch_assoc($query);
 }
+
+// AboutMe
+$query = mysqli_query($conn, "SELECT * FROM about  ORDER BY id DESC");
+$row = mysqli_fetch_assoc($query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,7 +124,7 @@ if (isset($_POST['simpan'])) {
 					<div class="row justify-content-start pb-3">
 						<div class="col-md-12 heading-section ftco-animate">
 							<h1 class="big">About</h1>
-							<h2 class="mb-4"><?= isset($row['name']) ? $row['name'] : ''; ?></h2>
+							<h2 class="mb-4"><?= $row['name']; ?></h2>
 							<p><?= isset($row['description']) ? $row['description'] : null; ?></p>
 							<ul class="about-info mt-4 px-md-0 px-2">
 								<li class="d-flex"><span>Name:</span> <span><?= isset($row['name']) ? $row['name'] : ''; ?></span></li>
@@ -129,7 +132,7 @@ if (isset($_POST['simpan'])) {
 								<li class="d-flex"><span>Address:</span> <span><?= $row['alamat']; ?></span></li>
 								<li class="d-flex"><span>Zip code:</span> <span><?= $row['zip_code']; ?></span></li>
 								<li class="d-flex"><span>Email:</span> <span><?= $row['email']; ?></span></li>
-								<li class="d-flex"><span>Phone: </span> <span>+1-2234-5678-9-0</span></li>
+								<li class="d-flex"><span>Phone: </span> <span><?= $row['phone']; ?></span></li>
 							</ul>
 						</div>
 					</div>
