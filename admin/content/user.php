@@ -1,6 +1,12 @@
 <?php
 $query = mysqli_query($conn, "SELECT user_role.role, users.* FROM users LEFT JOIN user_role ON user_role.id=users.id_role ORDER BY user_id DESC");
 $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+if (isset($_GET['delete'])) {
+  $id = $_GET['delete'];
+  $queryDelete = mysqli_query($conn, "DELETE FROM users WHERE user_id='$id'");
+  header("location:?page=user&hapus=berhasil");
+}
 ?>
 <div class="table-responsive">
   <div align="right" class="mb-3">
@@ -27,7 +33,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
           <td>
             <a href="?page=tambah-user&edit=<?php echo $datas['user_id'] ?>" class="btn btn-success btn-sm">Edit</a>
             <a onclick="return confirm('Are you sure??')"
-              href="user.php?delete=<?php echo $datas['user_id'] ?>" class="btn btn-warning btn-sm">Delete</a>
+              href="?page=user&delete=<?php echo $datas['user_id'] ?>" class="btn btn-warning btn-sm">Delete</a>
           </td>
         </tr>
       <?php endforeach; ?>

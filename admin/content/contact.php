@@ -5,12 +5,12 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
   $queryDelete = mysqli_query($conn, "DELETE FROM contact WHERE id_contact='$id'");
-  header("location:user.php?hapus=berhasil");
+  header("location:?page=contact&hapus=berhasil");
 }
 ?>
 <div class="table-responsive">
 
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
     <thead>
       <tr>
         <th>No</th>
@@ -18,6 +18,7 @@ if (isset($_GET['delete'])) {
         <th>Email</th>
         <th>Subject</th>
         <th>Pesan</th>
+        <th class="text-center">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +31,10 @@ if (isset($_GET['delete'])) {
           <td><?= $data['email'] ?></td>
           <td><?= $data['subject'] ?></td>
           <td><?= $data['message'] ?></td>
+          <td>
+            <a href="?page=contact&delete=<?= $data['id_contact'] ?>" class="btn btn-danger btn-sm d-flex justify-content-center align-items-center"
+              onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
+          </td>
         </tr>
       <?php endforeach ?>
     </tbody>

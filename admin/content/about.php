@@ -6,7 +6,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
   <div align="right" class="mb-3">
     <a href="?page=tambah-about" class="btn btn-primary">Add</a>
   </div>
-  <table class="table table-bordered">
+  <table class="table table-bordered" id="dataTable">
     <thead>
       <tr>
         <th>No</th>
@@ -26,7 +26,7 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
           <td>
             <?= $datas['status'] == 1 ? '<span class="badge rounded-pill bg-primary">Publish</span>' : '<span class="badge rounded-pill bg-danger">Draf</span>'; ?></td>
           <td>
-            <a href="about-edit.php?edit=<?= $datas['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+            <a href="?page=tambah-about&edit=<?php echo $datas['id'] ?>" class="btn btn-success btn-sm">Edit</a>
             <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $datas['id']; ?>"
               class="btn btn-danger btn-sm">Delete</a>
           </td>

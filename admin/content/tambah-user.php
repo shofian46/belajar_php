@@ -11,7 +11,7 @@ if (isset($_POST['simpan'])) {
 
   $query = mysqli_query($conn, "INSERT INTO users (name, email, id_role, password) VALUES (null,'$name', '$email', '$role', '$password')");
   if ($query) {
-    header('dashboard.php?page=user&tambah=berhasil');
+    header('?page=user&tambah=berhasil');
   }
 }
 
@@ -26,6 +26,9 @@ if (isset($_POST['edit'])) {
   $role = $_POST['role'];
   $password = sha1($_POST['password']);
 
+  if ($password == '') {
+    $queryUpdate = mysqli_query($config, "UPDATE users SET name='$name', email='$email' WHERE id='$id_user'");
+  }
   $queryUpdate = mysqli_query($conn, "UPDATE users SET name = '$name', email = '$email', id_role='$role', password = '$password' WHERE user_id='$id_user'");
   if ($queryUpdate) {
     header('location:?page=user&edit=berhasil');

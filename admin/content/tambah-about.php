@@ -1,4 +1,9 @@
 <?php
+$header = isset($_GET['edit']) ? "Edit" : "Tambah";
+$id_user = isset($_GET['edit']) ? $_GET['edit'] : '';
+$queryedit = mysqli_query($conn, "SELECT * FROM users WHERE user_id='$id_user'");
+$rowedit = mysqli_fetch_assoc($queryedit);
+
 if (isset($_POST['simpan'])) {
   // print_r($_POST);
   // die;
@@ -28,18 +33,6 @@ if (isset($_POST['simpan'])) {
       header("location:?page=about&tambah=berhasil");
     }
   }
-
-  /* if ($photo['error'] == 0) {
-    $filename = uniqid() . '_' . basename($photo['name']);
-    $filepath = 'assets/img/' . $filename;
-    move_uploaded_file($photo['tmp_name'], $filepath);
-
-    $inputQ = mysqli_query($conn, "INSERT INTO about (profile_name, profesion, description, photo) VALUES ('$nm_profile','$profession','$description','$filename')");
-  }
-
-  if ($inputQ) {
-    // header('location:dashboard.php?level=' . base64_encode($_SESSION['LEVEL']) . '&page=manage-profile');
-  } */
 }
 
 ?>
@@ -102,7 +95,7 @@ if (isset($_POST['simpan'])) {
     if (empty($row['profile_name'])) { ?>
       <div class="d-grid gap-2 d-md-block my-2">
         <button class="btn btn-secondary rounded-pill" type="reset">Reset</button>
-        <button class="btn btn-primary rounded-pill" type="submit" name="simpan">Simpan</button>
+        <button class="btn btn-primary rounded-pill" type="submit" name="simpan"><?= $header; ?></button>
       </div>
     <?php } else { ?>
       <div class="d-grid gap-2 d-md-block my-2">
