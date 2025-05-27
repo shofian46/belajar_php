@@ -28,7 +28,7 @@ if (isset($_POST['edit'])) {
 
   $queryUpdate = mysqli_query($conn, "UPDATE users SET name = '$name', email = '$email', id_role='$role', password = '$password' WHERE user_id='$id_user'");
   if ($queryUpdate) {
-    header('location:dashboard.php?page=user&edit=berhasil');
+    header('location:?page=user&edit=berhasil');
   }
 }
 $queryRole = mysqli_query($conn, "SELECT * FROM user_role");
