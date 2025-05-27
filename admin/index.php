@@ -5,7 +5,7 @@ include 'config/koneksi.php';
 if (isset($_POST['email']) && isset($_POST['password'])) {
   $email = $_POST['email'];
   $password = sha1($_POST['password']);
-
+  
   // Check if the email and password are empty
 
   $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'");

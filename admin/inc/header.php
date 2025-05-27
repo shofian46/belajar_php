@@ -1,6 +1,5 @@
 <?php
-
-
+$role_id = isset($_SESSION['role']) ? $_SESSION['role'] : '';
 ?>
 <header class="shadow-sm">
   <nav class="navbar navbar-expand-lg bg-body-white">
@@ -23,16 +22,17 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="?page=about">About Me</a></li>
+              <li><a class="dropdown-item" href="?page=contact">Contact</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="?page=user">User</a>
-          </li>
+          <?php
+          if ($role_id == '1') {
+            echo '<li class="nav-item">
+                    <a class="nav-link" href="?page=user">User</a>
+                  </li>';
+          }
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="?page=manage-profile">Profile</a>
           </li>

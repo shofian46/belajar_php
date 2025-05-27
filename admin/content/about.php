@@ -24,8 +24,10 @@ $row = mysqli_fetch_all($query, MYSQLI_ASSOC);
           <td><?= $datas['name']; ?></td>
           <td><?= $datas['email']; ?></td>
           <td>
-            <a href="about-edit.php?edit=<?= $datas['user_id']; ?>" class="btn btn-success btn-sm">Edit</a>
-            <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $datas['user_id']; ?>"
+            <?= $datas['status'] == 1 ? '<span class="badge rounded-pill bg-primary">Publish</span>' : '<span class="badge rounded-pill bg-danger">Draf</span>'; ?></td>
+          <td>
+            <a href="about-edit.php?edit=<?= $datas['id']; ?>" class="btn btn-success btn-sm">Edit</a>
+            <a onclick="return confirm('Are you sure?')" href="hapus.php?delete=<?= $datas['id']; ?>"
               class="btn btn-danger btn-sm">Delete</a>
           </td>
         </tr>
