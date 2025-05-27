@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2025 at 10:25 AM
+-- Generation Time: May 24, 2025 at 07:03 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,50 +29,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `about` (
   `id` int(11) NOT NULL,
-  `name` varchar(256) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `name` varchar(256) NOT NULL,
+  `description` text NOT NULL,
   `tempat` varchar(50) DEFAULT NULL,
-  `tanggal` date DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
-  `zip_code` int(11) DEFAULT NULL,
-  `email` varchar(256) DEFAULT NULL,
-  `phone` int(11) DEFAULT NULL,
-  `foto` varchar(256) DEFAULT NULL,
+  `tanggal` date NOT NULL,
+  `alamat` text NOT NULL,
+  `zip_code` int(11) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `phone` varchar(256) DEFAULT NULL,
   `file` varchar(256) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `contact`
---
-
-CREATE TABLE `contact` (
-  `id_contact` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `email` varchar(256) NOT NULL,
-  `subject` varchar(256) NOT NULL,
-  `message` text NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `update_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id_contact`, `name`, `email`, `subject`, `message`, `created_at`, `update_at`) VALUES
-(7, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:24:16'),
-(8, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:24:33'),
-(9, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:43:02'),
-(10, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:48:19'),
-(11, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:48:36'),
-(12, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:48:48'),
-(13, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:50:42'),
-(14, 'Retha', 'superuser@gmail.com', 'Holla', 'Holla', NULL, '2025-05-27 07:53:26');
 
 -- --------------------------------------------------------
 
@@ -86,31 +55,6 @@ CREATE TABLE `profiles` (
   `profesion` varchar(256) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `photo` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `profiles`
---
-
-INSERT INTO `profiles` (`id_profile`, `profile_name`, `profesion`, `description`, `photo`) VALUES
-(1, 'Cek', 'asdasd   ', '<p>Hallo</p>', '68352a0420bbf_img2.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resume`
---
-
-CREATE TABLE `resume` (
-  `id` int(11) NOT NULL,
-  `year_start` varchar(256) NOT NULL,
-  `year_end` varchar(256) NOT NULL,
-  `title` varchar(256) NOT NULL,
-  `subtitle` text NOT NULL,
-  `description` text NOT NULL,
-  `content` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -134,7 +78,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `id_role`, `name`, `email`, `password`, `create_at`, `updated_at`) VALUES
-(1, 1, 'Superadmin', 'superadmin@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', '2025-05-21 07:26:29', '2025-05-22 07:59:56');
+(1, 1, 'Superadmin', 'superadmin@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', '2025-05-21 07:26:29', '2025-05-22 07:59:56'),
+(6, 2, 'coba', 'coba@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '2025-05-23 04:40:37', '2025-05-24 02:51:30');
 
 -- --------------------------------------------------------
 
@@ -166,22 +111,10 @@ ALTER TABLE `about`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contact`
---
-ALTER TABLE `contact`
-  ADD PRIMARY KEY (`id_contact`);
-
---
 -- Indexes for table `profiles`
 --
 ALTER TABLE `profiles`
   ADD PRIMARY KEY (`id_profile`);
-
---
--- Indexes for table `resume`
---
-ALTER TABLE `resume`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -204,13 +137,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `contact`
---
-ALTER TABLE `contact`
-  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profiles`
@@ -219,16 +146,10 @@ ALTER TABLE `profiles`
   MODIFY `id_profile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `resume`
---
-ALTER TABLE `resume`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_role`
