@@ -23,7 +23,7 @@ $role_id = isset($_SESSION['role']) ? $_SESSION['role'] : '';
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="?page=about">About Me</a></li>
               <li><a class="dropdown-item" href="?page=contact">Contact</a></li>
-              <li><a class="dropdown-item" href="?page=resume">resume</a></li>
+              <li><a class="dropdown-item" href="?page=resume">Resume</a></li>
             </ul>
           </li>
           <?php
