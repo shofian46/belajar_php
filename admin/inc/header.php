@@ -24,6 +24,8 @@ $role_id = isset($_SESSION['role']) ? $_SESSION['role'] : '';
               <li><a class="dropdown-item" href="?page=about">About Me</a></li>
               <li><a class="dropdown-item" href="?page=contact">Contact</a></li>
               <li><a class="dropdown-item" href="?page=resume">Resume</a></li>
+              <li><a class="dropdown-item" href="?page=service">Service</a></li>
+              <li><a class="dropdown-item" href="?page=skill">Skill</a></li>
             </ul>
           </li>
           <?php

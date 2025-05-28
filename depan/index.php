@@ -17,12 +17,25 @@ if (isset($_POST['simpan'])) {
 $query = mysqli_query($conn, "SELECT * FROM about  ORDER BY id DESC");
 $row = mysqli_fetch_assoc($query);
 
+// Resume
+$queryResume = mysqli_query($conn, "SELECT * FROM resume ORDER BY id ASC");
+$rowResume = mysqli_fetch_all($queryResume, MYSQLI_ASSOC);
+
+// Profile
+$queryProfile = mysqli_query($conn, "SELECT * FROM profiles ORDER BY id_profile ASC");
+$rowProfile = mysqli_fetch_assoc($queryProfile);
+
+// service
+$queryService = mysqli_query($conn, "SELECT * FROM service ORDER BY id ASC");
+$rowService = mysqli_fetch_all($queryService, MYSQLI_ASSOC);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Clark - Free Bootstrap 4 Template by Colorlib</title>
+	<title>Shofian Al Fikri</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -49,7 +62,7 @@ $row = mysqli_fetch_assoc($query);
 
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html">Clark</a>
+			<a class="navbar-brand" href="index.html">Fikri</a>
 			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
@@ -80,8 +93,8 @@ $row = mysqli_fetch_assoc($query);
 						<div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 							<div class="text">
 								<span class="subheading">Hello!</span>
-								<h1 class="mb-4 mt-3">I'm <span>Clark Thompson</span></h1>
-								<h2 class="mb-4">A Freelance Web Designer</h2>
+								<h1 class="mb-4 mt-3">I'm <span><?= $rowProfile['profile_name']; ?></span></h1>
+								<h2 class="mb-4"><?= $rowProfile['profesion']; ?></h2>
 								<p><a href="#" class="btn btn-primary py-3 px-4">Hire me</a> <a href="#" class="btn btn-white btn-outline-white py-3 px-4">My works</a></p>
 							</div>
 						</div>
@@ -203,47 +216,16 @@ $row = mysqli_fetch_assoc($query);
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6">
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2014-2015</span>
-									<h2>Master Degree of Design</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+							<?php foreach ($rowResume as $r): ?>
+								<div class="col-md-6">
+									<div class="resume-wrap ftco-animate">
+										<span class="date"><?= date('Y', strtotime($r['year_start'])) ?> - <?= date('Y', strtotime($r['year_end'])) ?></span>
+										<h2><?= $r['title']; ?></h2>
+										<span class="position"><?= $r['subtitle']; ?></span>
+										<p class="mt-4"><?= $r['content']; ?></p>
+									</div>
 								</div>
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2014-2015</span>
-									<h2>Bachelor's Degree of C.A</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-								</div>
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2014-2015</span>
-									<h2>Diploma in Computer</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-								</div>
-							</div>
-
-							<div class="col-md-6">
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2014-2015</span>
-									<h2>Art &amp; Creative Director</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-								</div>
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2014-2015</span>
-									<h2>Wordpress Developer</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-								</div>
-								<div class="resume-wrap ftco-animate">
-									<span class="date">2017-2018</span>
-									<h2>UI/UX Designer</h2>
-									<span class="position">Cambridge University</span>
-									<p class="mt-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-								</div>
-							</div>
+							<?php endforeach; ?>
 						</div>
 						<div class="row justify-content-center mt-5">
 							<div class="col-md-6 text-center ftco-animate">
@@ -263,67 +245,18 @@ $row = mysqli_fetch_assoc($query);
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-analysis"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">Web Design</h3>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-flasks"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">Phtography</h3>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-ideas"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">Web Developer</h3>
-									</div>
-								</a>
-							</div>
-
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-analysis"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">App Developing</h3>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-flasks"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">Branding</h3>
-									</div>
-								</a>
-							</div>
-							<div class="col-md-4 text-center d-flex ftco-animate">
-								<a href="#" class="services-1">
-									<span class="icon">
-										<i class="flaticon-ideas"></i>
-									</span>
-									<div class="desc">
-										<h3 class="mb-5">Product Strategy</h3>
-									</div>
-								</a>
-							</div>
+							<?php foreach ($rowService as $rw): ?>
+								<div class="col-md-4 text-center d-flex ftco-animate">
+									<a href="#" class="services-1">
+										<span class="icon">
+											<i class="<?= $rw['icon']; ?>"></i>
+										</span>
+										<div class="desc">
+											<h3 class="mb-5"><?= $rw['servis']; ?></h3>
+										</div>
+									</a>
+								</div>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</section>
@@ -335,7 +268,7 @@ $row = mysqli_fetch_assoc($query);
 							<div class="col-md-12 heading-section text-center ftco-animate">
 								<h1 class="big big-2">Skills</h1>
 								<h2 class="mb-4">My Skills</h2>
-								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+								<!-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p> -->
 							</div>
 						</div>
 						<div class="row">
