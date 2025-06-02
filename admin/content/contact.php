@@ -34,6 +34,7 @@ if (isset($_GET['delete'])) {
           <td>
             <a href="?page=contact&delete=<?= $data['id_contact'] ?>" class="btn btn-danger btn-sm d-flex justify-content-center align-items-center"
               onclick="return confirm('Are you sure you want to delete this message?')">Delete</a>
+            <a href="?page=contact&balas-pesan=<?= $data['id_contact'] ?>" class="btn btn-primary btn-sm d-flex justify-content-center align-items-center my-3">Balas Pesan</a>
           </td>
         </tr>
       <?php endforeach ?>
